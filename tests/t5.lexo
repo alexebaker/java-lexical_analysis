@@ -1,0 +1,13 @@
+t5.lexi:2:1:$illchr:`
+t5.lexi:2:2:$id:like
+t5.lexi:2:6:$illchr:$
+t5.lexi:2:7:$id:this
+t5.lexi:2:11:$illchr:@
+t5.lexi:2:12:$id:stuff
+t5.lexi:2:17:$illchr:#
+t5.lexi:2:18:$id:here
+t5.lexi:2:22:$illchr:'
+t5.lexi:3:1:$illchr:\
+t5.lexi:3:2:$illchr:\
+t5.lexi:3:3:$id:o
+t5.lexi:3:29:$EOF

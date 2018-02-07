@@ -1,0 +1,7 @@
++-*/=
+regular tokens
+++--**//==
+=and= keywords 
+if do while
+ :case:?!
+var=3;

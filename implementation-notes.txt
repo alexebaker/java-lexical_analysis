@@ -1,0 +1,17 @@
+IMPLEMENTATION NOTES FOR SPIKE1
+
+TO REGEX OR NOT TO REGEX
+
+ - Regular expressions are certainly one possible way to approach
+   spike1 lexical analysis, and you can use them if you want to, but
+   you should note the following points.
+
+ - The spike1 lexical analysis can be performed with no more than one
+   byte lookahead and no backtracking -- with some care taken to
+   observe RULE 2 (s1.3.1.1.2) -- so regexes are somewhat overkill.
+
+ - Lexical analysis is usually expressed in terms of byte-at-a-time
+   processing, but regular expressions generally require entire lines
+   to be read up front.  This can create various edge and corner case
+   problems, not least of which involving the location of EOF.
+

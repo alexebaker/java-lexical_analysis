@@ -1,0 +1,12 @@
+1 NOTE://EMACS ^X` MAY SCREW UP SOME POSITIONING IN THIS FILE
+	22bc // because of the ahem unusual whitespace, but we just always                      go with the line number and byte number regardless of                           what columns output may appear in when displayed 
+		333def
+still	line	4ghi
+A		BCDE  
+1.23embedded dot// is part of a number
+.123, but unlike// C, a _leading_ dot is not. but
+123.//a trailing dot is fine. but of course
+123..//only one trailing dot counts.  and
+1.2.3//multiple dots can't be in one number
+12..34, no sir
+G EOF----->
