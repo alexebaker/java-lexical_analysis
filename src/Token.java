@@ -25,7 +25,10 @@ public class Token {
         this.value = value;
         this.location = cs.getInputPath();
         this.lineCount = cs.getLineCount();
-        if (value.length() > 0) {
+        if (token.equals("$EOF")) {
+            this.charCount = cs.getCharCount();
+        }
+        else if (value.length() > 0) {
             this.charCount = cs.getCharCount() - value.length() + 1;
         }
         else {

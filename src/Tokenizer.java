@@ -46,26 +46,26 @@ public class Tokenizer {
                 charBuffer = CharBuffer.allocate(this.bufferCapacity);
             }
             else if (LiteralToken.isToken(buf)) {
-                if (Character.isWhitespace(nextCh) || !LiteralToken.isToken(buf+nextToken) && !isComment(buf+nextToken)) {
+                if (isDelim(nextCh) || !LiteralToken.isToken(buf+nextToken) && !isComment(buf+nextToken) || NumberToken.isToken(nextToken)) {
                     this.cs.getIO().write(new LiteralToken(buf, cs).toString());
                     charBuffer = CharBuffer.allocate(this.bufferCapacity);
                 }
             }
             else if (KeywordToken.isToken(buf)) {
-                if (Character.isWhitespace(nextCh) || LiteralToken.isToken(nextToken)) {
-                    this.cs.getIO().write(new LiteralToken(buf, cs).toString());
+                if (isDelim(nextCh) || LiteralToken.isToken(nextToken)) {
+                    this.cs.getIO().write(new KeywordToken(buf, cs).toString());
                     charBuffer = CharBuffer.allocate(this.bufferCapacity);
                 }
             }
             else if (IdentifierToken.isToken(buf)) {
-                if (Character.isWhitespace(nextCh) || LiteralToken.isToken(nextToken)) {
+                if (isDelim(nextCh) || LiteralToken.isToken(nextToken)) {
                     this.cs.getIO().write(new IdentifierToken(buf, cs).toString());
                     charBuffer = CharBuffer.allocate(this.bufferCapacity);
                 }
             }
             else if (NumberToken.isToken(buf)) {
-                if (Character.isWhitespace(nextCh) || isNumDelim(nextToken)) {
-                    this.cs.getIO().write(new IdentifierToken(buf, cs).toString());
+                if (isDelim(nextCh) || isNumDelim(nextToken) || !NumberToken.isToken(buf+nextToken)) {
+                    this.cs.getIO().write(new NumberToken(buf, cs).toString());
                     charBuffer = CharBuffer.allocate(this.bufferCapacity);
                 }
             }
@@ -76,7 +76,12 @@ public class Tokenizer {
         }
     }
 
+    private boolean isDelim(int ch) {
+        return EOFToken.isToken(ch) || Character.isWhitespace(ch) || IllChrToken.isToken(Character.toString((char) ch));
+    }
+
     private boolean isNumDelim(String str) {
+        boolean literalToken;
         switch (str) {
             case "(":
             case ")":
@@ -84,6 +89,7 @@ public class Tokenizer {
             case "]":
             case "{":
             case "}":
+            case ",":
             case ";":
             case ":":
             case "::":
@@ -92,22 +98,31 @@ public class Tokenizer {
             case "=":
             case "==":
             case "!=":
+            case "<<":
+            case ">>":
             case "<":
             case ">":
             case "<=":
             case ">=":
             case "&":
+            case "&&":
             case "|":
+            case "||":
             case "^":
             case "*":
             case "%":
             case "/":
             case "+":
             case "-":
-                return true;
+            case "++":
+            case "--":
+                literalToken = true;
+                break;
             default:
-                return false;
+                literalToken = false;
         }
+
+        return literalToken || KeywordToken.isToken(str) || IdentifierToken.isToken(str);
     }
 
     private boolean isComment(String str) {
