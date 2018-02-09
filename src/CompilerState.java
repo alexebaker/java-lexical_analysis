@@ -33,24 +33,45 @@ public class CompilerState {
         }
     }
 
+    /**
+     * Gets the CompilerIO object for reading and writing
+     *
+     * @return the Compiler IO object
+     */
     public CompilerIO getIO() {
         return this.io;
     }
 
+    /**
+     * Gets the current line number in the file being compiled
+     *
+     * @return Current line number
+     */
     public int getLineCount() {
         return this.lineCount;
     }
 
+    /**
+     * Get the current char count for the given line
+     *
+     * @return The current char count
+     */
     public int getCharCount() {
         return this.charCount;
     }
 
+    /**
+     * Path the the file or input being read from
+     *
+     * @return Path to input stream
+     */
     public String getInputPath() {
         return this.inputPath;
     }
 
     /**
-     * Reads a byte from the input.
+     * Reads a byte from the input. This will also increment the
+     * line count and char count as needed.
      *
      * @return the read byte
      */

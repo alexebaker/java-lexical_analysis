@@ -12,10 +12,6 @@ public class Token {
     private int lineCount;
     private int charCount;
 
-    Token() {
-        this("", "", new CompilerState());
-    }
-
     Token(String token, CompilerState cs) {
         this(token, "", cs);
     }
@@ -25,6 +21,10 @@ public class Token {
         this.value = value;
         this.location = cs.getInputPath();
         this.lineCount = cs.getLineCount();
+
+        // Kinda a hack, but used to get the correct char position for the different tokens.
+        // Need to subtract off the length of the token, since it is printed after the entire
+        // token is read, so char position will be at the end of the token and not the beginning.
         if (token.equals("$EOF")) {
             this.charCount = cs.getCharCount();
         }
@@ -36,6 +36,7 @@ public class Token {
         }
     }
 
+    @Override
     public String toString() {
         String str = location + ":" + lineCount + ":" + charCount + ":" + token;
         if (this.value.length() > 0) {

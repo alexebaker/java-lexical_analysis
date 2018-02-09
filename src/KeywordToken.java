@@ -3,6 +3,11 @@ public class KeywordToken extends Token {
         super(token, cs);
     }
 
+    /**
+     * Checks if ch is a valid Keyword Token
+     * @param str string to check if it is an Keyword token
+     * @return true if ch is an Keyword Token, false otherwise
+     */
     public static boolean isToken(String str) {
         switch (str) {
             case "bool":

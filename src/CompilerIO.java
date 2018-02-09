@@ -98,14 +98,29 @@ public class CompilerIO {
         return this.in.markSupported();
     }
 
+    /**
+     * Writes the character or string to the output buffer
+     *
+     * @param ch Character to write
+     */
     public void write(int ch) {
         write((char) ch);
     }
 
+    /**
+     * Writes the character or string to the output buffer
+     *
+     * @param ch Character to write
+     */
     public void write(char ch) {
         write(Character.toString(ch));
     }
 
+    /**
+     * Writes the character or string to the output buffer
+     *
+     * @param str String to write
+     */
     public void write(String str) {
         try {
             this.out.write(str);
@@ -120,7 +135,7 @@ public class CompilerIO {
     }
 
     /**
-     * Closes the input reader
+     * Closes the input reader and output writer
      */
     public void close() {
         try {
